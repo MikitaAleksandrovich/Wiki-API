@@ -86,12 +86,26 @@ app.route('/articles/:articleTitle')
         {overwrite: true},
         err => {
             if(!err) {
-                res.send('Successfully updated article')
+                res.send('Successfully updated article.')
             } else {
                 res.send(err);
             }
         }
     )
+})
+
+.patch((req, res) => {
+    Article.update(
+        {title: req.params.articleTitle},
+        {$set: req.body},
+        err => {
+            if(!err) {
+                res.send('Successfully updated article.')
+            } else {
+                res.send(err);
+            }
+        }
+    );
 });
 
 app.listen(3000, () => {
