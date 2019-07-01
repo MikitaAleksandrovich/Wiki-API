@@ -74,6 +74,24 @@ app.route('/articles/:articleTitle')
             }
         }
     )
+})
+
+.put((req, res) => {
+    Article.update(
+        {title: req.params.articleTitle},
+        {
+            title: req.body.title,
+            content: req.body.content
+        },
+        {overwrite: true},
+        err => {
+            if(!err) {
+                res.send('Successfully updated article')
+            } else {
+                res.send(err);
+            }
+        }
+    )
 });
 
 app.listen(3000, () => {
