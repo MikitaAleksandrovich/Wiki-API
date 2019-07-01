@@ -73,7 +73,7 @@ app.route('/articles/:articleTitle')
                 res.send('No artilce mathcing that title was found!');
             }
         }
-    )
+    );
 })
 
 .put((req, res) => {
@@ -91,7 +91,7 @@ app.route('/articles/:articleTitle')
                 res.send(err);
             }
         }
-    )
+    );
 })
 
 .patch((req, res) => {
@@ -103,6 +103,19 @@ app.route('/articles/:articleTitle')
                 res.send('Successfully updated article.')
             } else {
                 res.send(err);
+            }
+        }
+    );
+})
+
+.delete((req, res) => {
+    Article.deleteOne(
+        {title: req.params.articleTitle},
+        err => {
+            if(!err) {
+                res.send('Successfully deleted article!')
+            } else {
+                res.send(err)
             }
         }
     );
